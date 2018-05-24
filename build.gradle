@@ -1,5 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
 plugins {
     id 'java'
+}
+
+plugins {
+    id 'com.avast.gradle.docker-compose' version "0.7.1"
 }
 
 group 'ash.java'
@@ -18,3 +28,5 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 }
+
+dockerCompose.isRequiredBy(test)
