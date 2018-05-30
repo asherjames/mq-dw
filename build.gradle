@@ -6,11 +6,38 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'com.avast.gradle.docker-compose' version '0.7.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.2'
+    id 'org.unbroken-dome.test-sets' version '1.4.2'
 }
 
-plugins {
-    id 'com.avast.gradle.docker-compose' version "0.7.1"
+jar {
+    baseName = 'mqdw'
+    version = '1.0-SNAPSHOT'
+    manifest {
+        attributes 'Main-Class': 'ash.java.mqdw.MqdwApplication'
+    }
 }
+
+task copyDocker(type: Copy) {
+    from 'docker'
+    into 'build'
+}
+
+task copyYml(type: Copy) {
+    from 'yml'
+    into 'build'
+}
+
+testSets {
+    smokeTest
+}
+
+build.dependsOn shadowJar, copyDocker, copyYml
+
+smokeTest.dependsOn build
+
+dockerCompose.isRequiredBy(smokeTest)
 
 group 'ash.java'
 version '1.0-SNAPSHOT'
@@ -27,6 +54,10 @@ dependencies {
     compile 'zone.dragon.dropwizard:dropwizard-hk2:1.2.2-245f94'
 
     testCompile 'junit:junit:4.12'
+}
+
+dockerCompose {
+    useComposeFiles = ['docker/docker-compose.yml']
 }
 
 dockerCompose.isRequiredBy(test)

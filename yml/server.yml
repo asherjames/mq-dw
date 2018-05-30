@@ -1,0 +1,5 @@
+queueName: ${Q_NAME}
+queueManager: ${Q_MANAGER}
+queueChannel: ${Q_CHANNEL}
+host: ${Q_HOST}
+port: ${Q_PORT}
