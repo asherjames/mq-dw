@@ -1,5 +1,6 @@
 package ash.java.mqdw.config;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -8,18 +9,23 @@ import javax.validation.constraints.NotNull;
 public class MqdwConfig extends Configuration
 {
   @NotEmpty
+  @JsonProperty
   private String queueName;
 
   @NotEmpty
+  @JsonProperty
   private String queueManager;
 
   @NotEmpty
+  @JsonProperty
   private String queueChannel;
 
   @NotEmpty
+  @JsonProperty
   private String host;
 
   @NotNull
+  @JsonProperty
   private Integer port;
 
   public String getQueueName()

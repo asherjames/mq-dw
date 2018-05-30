@@ -33,9 +33,9 @@ testSets {
     smokeTest
 }
 
-build.dependsOn shadowJar, copyDocker, copyYml
+composeUp.dependsOn shadowJar, copyDocker, copyYml
 
-smokeTest.dependsOn build
+//smokeTest.dependsOn build
 
 dockerCompose.isRequiredBy(smokeTest)
 
@@ -57,7 +57,7 @@ dependencies {
 }
 
 dockerCompose {
-    useComposeFiles = ['docker/docker-compose.yml']
+    useComposeFiles = ['build/docker-compose.yml']
 }
 
 dockerCompose.isRequiredBy(test)

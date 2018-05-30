@@ -1,0 +1,20 @@
+version: '3'
+services:
+  dw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - Q_NAME=sample
+      - Q_MAN=qman
+      - Q_CHANNEL=channel
+      - Q_HOST=localhost
+      - Q_PORT=9000
+  mq:
+    build:
+      context: .
+      dockerfile: mq_Dockerfile
+    environment:
+      - LICENSE=accept
